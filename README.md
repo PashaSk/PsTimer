@@ -1,0 +1,2 @@
+# PsTimer
+AngularJs timer directive
