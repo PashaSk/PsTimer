@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "PashaSk timer service",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "karma start test/karma.conf.js"
+  },
+  "keywords": [
+    "timer",
+    "moment",
+    "angular"
+  ],
+  "author": "PashaSk",
+  "license": "MIT",
+  "devDependencies": {
+    "angular": "1.5.8",
+    "angular-mocks": "^1.5.6",
+    "jasmine": "^2.4.1",
+    "karma": "*",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-ng-scenario": "^1.0.0",
+    "moment": "^2.14.1"
+  }
+}
