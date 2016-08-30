@@ -2,10 +2,77 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Test</title>
-	<script src="../src/pashask.timer.service.js"></script>
+	<title>PashaSk Timer Directive</title>
+	<script src="js/moment.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://raw.githubusercontent.com/PashaSk/PsTimer/master/dist/pashask.timer.service.js"></script>
+	<link rel="stylesheet" href="styles/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/styles.css">
+	<script>
+		var mainModule = angular.module('main', ['ps.timer'])
+				.controller('mainController', ["$scope", "$timeout", "psTimer", "$interval", function($scope, $timeout, psTimer, $interval) {
+
+
+					$scope.service = psTimer;
+
+					$scope.timer1 = psTimer.initTimer({h: -1, m:1, s:-30});
+					$scope.timer2 = psTimer.initTimer({}, true);
+
+					function resetAll() {
+						psTimer.resetAll();
+					}
+
+				}]);
+	</script>
 </head>
-<body>
-<h2>Test Pages</h2>
+<body ng-app="main" ng-controller="mainController">
+<div style="width: 92%; max-width:1200px; margin: 0 auto;">
+	<article>
+		<h1>PashaSk Timer Service</h1>
+		<p class="text-sm">Measure time of everything within your page.</p>
+		<p class="margin-t">Based on MomentJs, service provide extensive opportunity to keep timer on your page and flexible API to shift, start, stop, reset your TimerObject.</p>
+		<h2>Usage</h2>
+		<ol>
+			<li>Add js-source to your page</li>
+			<li>Update module dependencies with new one:
+				<pre>angular.module('main', ['ps.timer']);</pre>
+			</li>
+			<li>Include service to your controller and enjoy:
+				<pre>myModule.controller("myAwesomeController", ["$scope", "psTimer", function($scope, psTimer) {});</pre>
+			</li>
+		</ol>
+		<h2>API and examples</h2>
+		<div class="row">
+			<div class="col-sm-6">Initial call:</div>
+			<div class="col-sm-6">
+				<pre>$scope.myTimer = psTimer.initTimer();</pre>
+			</div>
+		</div>
+		<textarea class="form-control"></textarea>
+	</article>
+
+	<table>
+		<tr>
+			<td>Initial call:</td>
+			<td><pre>$scope.myTimer = psTimer.initTimer();</pre></td>
+		</tr>
+	</table>
+	<div class="row">
+		<div class="col-xs-12">
+			{{timer1.format("m:s:ms")}}<br>
+			<button class="btn btn-primary" ng-click="timer1.remove()">Remove timer1</button><br>
+			<button class="btn btn-primary" ng-click="timer1.reset()">reset timer1</button><br>
+			<button class="btn btn-danger" ng-click="service.resetAll()">Reset All</button>
+			<button class="btn btn-success" ng-click="service.stopAll()">Stop All</button>
+			<button class="btn btn-primary" ng-click="service.resumeAll()">Resume All</button>
+			<button class="btn btn-danger" ng-click="service.removeAll()">Remove All</button>
+
+			timer2 with format: {{timer2.format("m:s")}}<br>
+			<div ng-if="timer1.isRemoved">Timer1 removed!</div>
+			<br>
+			{{timer4}}
+		</div>
+	</div>
+</div>
 </body>
 </html>

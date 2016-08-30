@@ -1,5 +1,5 @@
 {
-  "name": "timer-directive",
+  "name": "timer-service",
   "authors": [
     "Pavel Sklyar <p.sklyar@mightycall.com>"
   ],
@@ -13,10 +13,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "moment": "momentjs#^2.14.1",
-    "angular": "1.5.8",
-    "bootstrap": "^3.3.7"
-  }
+  ]
 }

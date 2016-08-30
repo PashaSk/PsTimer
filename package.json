@@ -1,8 +1,8 @@
 {
-  "name": "test",
+  "name": "pashask-timer",
   "version": "1.0.0",
   "description": "PashaSk timer service",
-  "main": "karma.conf.js",
+  "main": "dist/pashask.timer.service.js",
   "scripts": {
     "test": "karma start test/karma.conf.js"
   },

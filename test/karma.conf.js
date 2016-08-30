@@ -18,7 +18,7 @@ module.exports = function (config) {
             "../node_modules/moment/min/moment.min.js",
             "../node_modules/angular/angular.min.js",
             "../node_modules/angular-mocks/angular-mocks.js",
-            "../src/pashask.timer.service.js",
+            "../dist/pashask.timer.service.js",
             "unit/*.test.js"
         ],
         // test results reporter to use
