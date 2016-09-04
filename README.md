@@ -1,2 +1,6 @@
 # PsTimer
-AngularJs timer directive
+AngularJs timing service
+Examples and demo: https://pashask.github.io/PsTimer/
+
+
+
