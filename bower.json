@@ -1,12 +1,12 @@
 {
   "name": "timer-service",
   "authors": [
-    "Pavel Sklyar <p.sklyar@mightycall.com>"
+    "Pavel Sklyar <p1653v@yandex.ru>"
   ],
   "description": "",
-  "main": "",
+  "main": "dist/pashask.timer.service.js",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://pashask.github.io/PsTimer/",
   "ignore": [
     "**/.*",
     "node_modules",

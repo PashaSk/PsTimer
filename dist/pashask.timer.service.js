@@ -1,4 +1,7 @@
 /*
+Copyright 2016 PashaSk
+Timing service for Angular. https://pashask.github.io/PsTimer/
+ver 1.0.0
 momentjs is required
 
 */
