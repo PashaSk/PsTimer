@@ -16,11 +16,11 @@
 					$scope.service = psTimer;
 
 					$scope.formattingTimer = psTimer.initTimer({d: 2, h: 1, m:10, s:30});
-					$scope.timer2 = psTimer.initTimer({}, true);
+					$scope.shiftingTimer = psTimer.initTimer({d: 1, h:10, m:2});
+					$scope.shiftingTimer2 = psTimer.initTimer({d: 1, h:10, m:2});
+					$scope.shiftingTimer3 = psTimer.initTimer({ m:2});
+					$scope.shiftingTimer4 = psTimer.initTimer({m:10});
 
-					function resetAll() {
-						psTimer.resetAll();
-					}
 
 					$scope.runInitial = function() {
 						$scope.initialTimer = psTimer.initTimer();
@@ -34,10 +34,14 @@
 						$scope.initialWithStartPointBelowZero = psTimer.initTimer({m:-5, s:-30});
 					}
 
+					$scope.initFreezedTimer = function() {
+						$scope.freezedTimer = psTimer.initTimer({}, true);
+					}
+
 				}]);
 	</script>
 </head>
-<body ng-app="main" ng-controller="mainController">
+<body ng-app="main" ng-controller="mainController" style="margin-bottom: 100px;">
 <div style="width: 92%; max-width:1200px; margin: 0 auto;">
 	<article>
 		<h1>PashaSk Timer Service</h1>
@@ -55,12 +59,14 @@
 		</ol>
 		<h2>API and examples</h2>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-12">
 				<b>Initial call:</b>
 				<p>Initiate timer instance with 00:00</p>
 				<p>Variable myTimer will get a Timer instance with methods described below</p>
 			</div>
-			<div class="col-md-5">
+		</div>
+		<div class="row">
+			<div class="col-md-9">
 				<div class="row">
 					<div class="col-xs-10">
 						<pre>$scope.myTimer = psTimer.initTimer();</pre>
@@ -74,13 +80,15 @@
 				{{initialTimer.format("m:s:ms")}} <span ng-if="initialTimer"> //myTimer.format("m:s:ms")</span>
 			</div>
 		</div>
-		<div class="row margin-tsm">
-			<div class="col-md-4">
+		<div class="row margin-t">
+			<div class="col-md-12">
 				<b>Initial with start point:</b>
 				<p>Timer will start with your value</p>
 				<p>For object format see <a href="http://momentjs.com/docs/#/durations/">MomentJS durations</a></p>
 			</div>
-			<div class="col-md-5">
+			</div>
+		<div class="row">
+			<div class="col-md-9">
 				<div class="row">
 					<div class="col-xs-10">
 						<pre>$scope.myTimer = psTimer.initTimer({h:1, m:10, s:30});</pre>
@@ -94,12 +102,14 @@
 				{{initialWithStartPoint.format("h:m:s:ms")}} <span ng-if="initialWithStartPoint"> //myTimer.format("h:m:s:ms")</span>
 			</div>
 		</div>
-		<div class="row margin-tsm">
-			<div class="col-md-4">
+		<div class="row margin-t">
+			<div class="col-md-12">
 				<b>Initial with start below zero:</b>
 				<p>Your get countdown</p>
 			</div>
-			<div class="col-md-5">
+			</div>
+		<div class="row">
+			<div class="col-md-9">
 				<div class="row">
 					<div class="col-xs-10">
 						<pre>$scope.myTimer = psTimer.initTimer({m:-5, s:-30});</pre>
@@ -113,7 +123,7 @@
 				{{initialWithStartPointBelowZero.format("m:s:ms")}} <span ng-if="initialWithStartPointBelowZero"> //myTimer.format("m:s:ms")</span>
 			</div>
 		</div>
-		<div class="row margin-tsm">
+		<div class="row margin-t">
 			<div class="col-md-4">
 				<b>Formatting examples:</b>
 				<p> 'd' : 'days',<br>
@@ -130,32 +140,80 @@
 				<div>{{formattingTimer.format("s:ms")}} //myTimer.format("s:ms")</div>
 			</div>
 		</div>
-		<div class="row margin-tsm">
+		<div class="row margin-t">
 			<div class="col-md-4">
 				<b>Shifting:</b>
-				<p>Shift your TimerObj whatever you want using MomentJS duration add syntax</p>
+				<p>Shift your TimerObj whatever you want using <a href="http://momentjs.com/docs/#/durations/add/">MomentJS duration add syntax</a></p>
 			</div>
 			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-12">
+						<pre>psTimer.add({h: 3})</pre>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-6">{{shiftingTimer.format("h:m:s")}}</div>
+							<div class="col-md-6"><button class="btn btn-success" ng-click=shiftingTimer.shift({h:3})>Add 3 hours!</button></div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">{{shiftingTimer2.format("h:m:s")}}</div>
+							<div class="col-md-6"> <button class="btn btn-success" ng-click=shiftingTimer2.shift({m:10})>Add 10 minutes!</button></div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">{{shiftingTimer3.format("m:s")}}</div>
+							<div class="col-md-6"><button class="btn btn-success" ng-click=shiftingTimer3.shift({m:30})>Add 30 minutes!</button></div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">{{shiftingTimer4.format("m:s:ms")}}</div>
+							<div class="col-md-6"><button class="btn btn-success" ng-click=shiftingTimer4.shift({s:25})>Add 25 seconds!</button></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h2>Service static methods</h2>
+		<div class="row">
+			<div class="col-md-4">
+				<b>Stop all timers</b>
+			</div>
+			<div class="col-md-4">
+				<pre>psTimer.stopAll()</pre>
+				<button class="btn btn-danger" ng-click="service.stopAll()">Stop all!</button>
+			</div>
+		</div>
+		<div class="row margin-t">
+			<div class="col-md-4">
+				<b>Resume all</b>
+			</div>
+			<div class="col-md-4">
+				<pre>psTimer.removeAll()</pre>
+				<button class="btn btn-success" ng-click="service.resumeAll()">Resume All</button>
+			</div>
+		</div>
+		<div class="row margin-t">
+			<div class="col-md-4">
+				<b>Reset all</b>
+			</div>
+			<div class="col-md-4">
+				<pre>psTimer.resetAll()</pre>
+				<button class="btn btn-primary" ng-click="service.resetAll()">Reset All</button>
+			</div>
+		</div>
+		<h2>Etc. options</h2>
+		<div class="row margin-t">
+			<div class="col-md-4">
+				<b>Freeze start</b>
+				<p>Timer will start after resume command</p>
+			</div>
+			<div class="col-md-4">
+				<pre>myTimer = psTimer.initTimer({}, true)</pre>
+				<button class="btn btn-success" ng-click="initFreezedTimer()">Run</button><br>
+				<div ng-if="freezedTimer" class="margin-t">
+					{{freezedTimer.format("m:s");}}    <button class="btn btn-success" ng-click="freezedTimer.resume()">Resume this</button>
+				</div>
 			</div>
 		</div>
 	</article>
-
-	<!--<div class="row">-->
-		<!--<div class="col-xs-12">-->
-			<!--{{timer1.format("m:s:ms")}}<br>-->
-			<!--<button class="btn btn-primary" ng-click="timer1.remove()">Remove timer1</button><br>-->
-			<!--<button class="btn btn-primary" ng-click="timer1.reset()">reset timer1</button><br>-->
-			<!--<button class="btn btn-danger" ng-click="service.resetAll()">Reset All</button>-->
-			<!--<button class="btn btn-success" ng-click="service.stopAll()">Stop All</button>-->
-			<!--<button class="btn btn-primary" ng-click="service.resumeAll()">Resume All</button>-->
-			<!--<button class="btn btn-danger" ng-click="service.removeAll()">Remove All</button>-->
-
-			<!--timer2 with format: {{timer2.format("m:s")}}<br>-->
-			<!--<div ng-if="timer1.isRemoved">Timer1 removed!</div>-->
-			<!--<br>-->
-			<!--{{timer4}}-->
-		<!--</div>-->
-	<!--</div>-->
 </div>
 </body>
 </html>
